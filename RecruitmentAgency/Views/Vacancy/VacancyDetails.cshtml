@@ -1,0 +1,93 @@
+﻿@using RecruitmentAgency.Data_Access_Layer
+@model RecruitmentAgency.Models.Vacancy
+
+@{
+	ViewBag.Title = "Детальное опписание вакансии";
+}
+
+<div>
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.CompanyName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CompanyName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Description)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Description)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.WorkExpirience)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.WorkExpirience)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Requirements)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Requirements)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Payment)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Payment)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.KeyWords)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.KeyWords)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.CloseTime)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CloseTime)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.IsOpen)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.IsOpen)
+		</dd>
+
+
+	</dl>
+</div>
+@if (UserDAL.GetUserByName(User.Identity.Name).Id == Model.UserId)
+{
+	<p>
+		@Html.ActionLink("Открыть или закрыть вакансию", "VacancyDetails", "Vacancy", new { id = Model.Id, isOpen = Model.IsOpen }, null)
+	</p>
+	<div>
+		@Html.ActionLink("Найти подходящих кандидатов", "CandidateForVacancy", "Vacancy", new { id = Model.Id }, null)
+	</div>
+}

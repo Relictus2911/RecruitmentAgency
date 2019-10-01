@@ -1,0 +1,22 @@
+﻿@using RecruitmentAgency.Data_Access_Layer
+@if (Request.IsAuthenticated)
+{
+
+	using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+	{
+		@Html.AntiForgeryToken()
+		<div class="nav navbar-nav navbar-left">
+			<ul class="nav navbar-nav"></ul>
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="@Url.Action("ListOfVacancies", "Vacancy")">Посмотреть вакансии</a>  </li>
+			<li><a href="@Url.Action("ListOfVacancies", "Vacancy")">Найти подходящую вакансию</a></li>			
+			<li><a href="@Url.Action("CandidateDetails", "Candidate",new { UserDAL.GetUserByName(User.Identity.Name).Id })">Резюме</a></li>		
+			<li>
+				@Html.ActionLink("Здравствуйте, " + User.Identity.Name + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage" })
+			</li>
+			<li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+		</ul>
+	}
+
+}

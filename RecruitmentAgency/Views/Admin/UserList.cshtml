@@ -1,0 +1,43 @@
+﻿
+@{
+	ViewBag.Title = "Список пользователей";
+}
+
+@model IEnumerable<RecruitmentAgency.Models.User>
+
+<div>
+	<table class="table table-hover" id="resultTable">
+		<thead>
+			<tr>
+				<th class="col-md-3">
+					<p>Имя пользователя</p>
+				</th>
+				<th class="col-md-3">
+					<p>Роль</p>
+				<th>
+				<th class="col-md-3"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+			<tr>
+				<td>@item.UserName</td>
+				<td>@item.Role</td>
+				@if (item.Role == RecruitmentAgency.Enum.Role.candidate)
+				{
+					<td>@Html.ActionLink("Резюме", "CandidateDetails", "Candidate", new { item.Id }, null) </td>
+				}
+				@if (item.Role == RecruitmentAgency.Enum.Role.employer)
+				{
+					<td>@Html.ActionLink("Список Вакансий", "MyVacancies", "Vacancy", new { item.Id }, null) </td>
+				}
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

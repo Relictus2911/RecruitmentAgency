@@ -1,0 +1,61 @@
+﻿@using RecruitmentAgency.Data_Access_Layer
+@{
+	ViewBag.Title = "Список вакансий";
+}
+
+
+@model IEnumerable<RecruitmentAgency.Models.ViewModels.VacancyViewModel>
+
+@using (Html.BeginForm("ListOfVacancies", "Vacancy", FormMethod.Post, new { id = "view-vacancy-form" }))
+{
+
+	<p>
+		Find : @Html.TextBox("Поиск по имени")
+		<input type="submit" value="Search" />
+	</p>
+	<p>
+		Find : @Html.TextBox("Поиск по дате", DateTime.Today.ToShortDateString(), new { htmlAttributes = new { @class = "form-control datepicker" } })
+		<input type="submit" value="Search" />
+	</p>
+	<p>
+		Find : @Html.TextBox("Поиск по оплате")
+		<input type="submit" value="Search" />
+	</p>
+
+	<table class="table table-hover" id="resultTable">
+		<thead>
+			<tr>
+				<th>
+					@Html.ActionLink("Name", "ListOfVacancies", "Vacancy", new { sortOrder = ViewBag.NameSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Description", "ListOfVacancies", "Vacancy", new { sortOrder = ViewBag.DescripSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("CloseTime", "ListOfVacancies", "Vacancy", new { sortOrder = ViewBag.CloseDateSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Payment", "ListOfVacancies", "Vacancy", new { sortOrder = ViewBag.PaymentSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("IsOpen", "ListOfVacancies", "Vacancy", new { sortOrder = ViewBag.IsOpenSortParam }, null)
+				</th>
+				<th class="col-md-1"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Name</td>
+					<td>@item.Description</td>
+					<td>@item.CloseTime</td>
+					<td>@item.Payment</td>
+					<td>@item.IsOpen</td>
+					<td>@Html.ActionLink("Детали", "VacancyDetails", "Vacancy", new { item.Id }, null) </td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+

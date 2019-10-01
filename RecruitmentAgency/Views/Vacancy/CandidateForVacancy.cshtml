@@ -1,0 +1,30 @@
+﻿
+@{
+	ViewBag.Title = "Кандидаты подходящие для вакансии";
+}
+
+
+@model IEnumerable<RecruitmentAgency.Models.Candidate>
+
+@using (Html.BeginForm("CandidateForVacancy", "Vacancy", FormMethod.Post, new { id = "view-candidates-form" }))
+{
+	<table class="table table-hover" id="resultTable">
+		<thead>
+			<tr>
+				<th class="col-md-5 ">FullName</th>
+				<th class="col-md-3 ">KeyWords</th>
+				<th class="col-md-1"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.FullName</td>
+					<td>@item.KeyWords</td>
+					<td>@Html.ActionLink("Details", "CandidateDetails", "Candidate", new { id = item.UserId }, null)</td>
+				</tr>
+					}
+			</tbody>
+		</table>
+	}

@@ -1,0 +1,48 @@
+﻿
+@{
+	ViewBag.Title = "Подходящие вакансии";
+}
+
+<h1>Подходящие вакансии</h1>
+@model IEnumerable<RecruitmentAgency.Models.Vacancy>
+
+@using (Html.BeginForm("MyVacancies", "Vacancy", FormMethod.Post, new { id = "view-vacancy-form" }))
+{
+
+
+	<table class="table table-hover" id="resultTable">
+		<thead>
+			<tr>
+				<th>
+					@Html.ActionLink("Имя", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.NameSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Описание", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.DescripSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Дата закрытия", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.CloseDateSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Оплата", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.PaymentSortParm }, null)
+				</th>
+				<th>
+					@Html.ActionLink("Вакансия открыта?", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.IsOpenSortParam }, null)
+				</th>
+				<th class="col-md-1"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Name</td>
+					<td>@item.Description</td>
+					<td>@item.CloseTime</td>
+					<td>@item.Payment</td>
+					<td>@item.IsOpen</td>
+					<td>@Html.ActionLink("Детали", "VacancyDetails", "Vacancy", new { item.Id }, null) </td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="RecruitmentAgency.Models" assembly="RecruitmentAgency">
+
+  <class name="Vacancy" table="Vacancy" dynamic-update="true">
+    <cache usage="read-write"/>
+    <id name="Id">
+      <column name="Id" sql-type="int" not-null="true"/>
+      <generator class="native"/>
+    </id>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar(50)" not-null="true" />
+    </property>
+    <property name="CompanyName">
+      <column name="CompanyName" sql-type="nvarchar(50)"/>
+    </property>
+    <property name="Description" >
+      <column name="Description" sql-type="ntext" />
+    </property>
+    <property name="CloseTime">
+      <column name="CloseTime" sql-type="date" />
+    </property>
+    <property name="Requirements" >
+      <column name="Requirements" sql-type="ntext" />
+    </property>
+    <property name="KeyWords">
+      <column name="KeyWords" sql-type="nvarchar(50)"/>
+    </property>
+    <property name="IsOpen">
+      <column name="IsOpen" sql-type="bit"/>
+    </property>
+    <property name="Payment" >
+      <column name="Payment" sql-type="ntext" />
+    </property>
+    <many-to-one
+        name="UserId"
+        column="UserId"
+        class ="User"
+        not-null="true"/>
+
+    <property name="WorkExpirience" >
+      <column name="WorkExpirience" sql-type="PersistentEnum" />
+    </property>
+    
+  </class>
+
+</hibernate-mapping>

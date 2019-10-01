@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="RecruitmentAgency.Models" assembly="RecruitmentAgency">
+
+  <class name="Candidate" table="Candidate" dynamic-update="true">
+    <cache usage="read-write"/>
+    <id name="Id">
+      <column name="Id" sql-type="int" not-null="true"/>
+      <generator class="native"/>
+    </id>
+    <property name="FullName">
+      <column name="FullName" sql-type="nvarchar(50)" not-null="true" />
+    </property>
+    <property name="Birthday" >
+      <column name="Birthday" sql-type="date" />
+    </property>
+    <property name="KeyWords" >
+      <column name="KeyWords" sql-type="ntext" />
+    </property>
+    <property name="Photo" >
+      <column name="Photo" sql-type="varbinary(max)" />
+    </property>    
+    <property name="WorkExpirience" >
+      <column name="WorkExpirience" sql-type="PersistentEnum" />
+    </property>
+
+    <many-to-one name="UserId" class="User" column="UserId" unique="true"/>
+
+  </class>
+
+</hibernate-mapping>
