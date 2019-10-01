@@ -42,7 +42,7 @@ namespace RecruitmentAgency.Controllers
             {
                 VacancyDAL.Create(new Vacancy { Name = model.Name, CompanyName = model.CompanyName, Description = model.Description, Requirements = model.Requirements, Payment = model.Payment, KeyWords = model.KeyWords, CloseTime = model.CloseTime, IsOpen = model.IsOpen, WorkExpirience = model.WorkExpirience, UserId = UserDAL.GetUserByName(User.Identity.Name) });
                 ViewBag.Message = "Your contact page.";
-                return this.RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -176,7 +176,7 @@ namespace RecruitmentAgency.Controllers
                 }
                 return View("MyVacancies", vacancies);
             }
-            return View("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -184,7 +184,7 @@ namespace RecruitmentAgency.Controllers
         {
             if (UserDAL.GetUserByName(User.Identity.Name).Role == Enum.Role.candidate)
             {
-                return View("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             var model = CandidateDAL.SearchForCandidate(VacancyDAL.GetVacancyById(id).KeyWords, VacancyDAL.GetVacancyById(id).WorkExpirience);
             return View("CandidateForVacancy", model);

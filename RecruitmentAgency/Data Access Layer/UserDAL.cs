@@ -32,6 +32,18 @@ namespace RecruitmentAgency.Data_Access_Layer
             }
         }
 
+        public static bool RemoveUser(int id)
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                IQuery query = session.CreateSQLQuery("exec remove_user @Id=:id");
+                query.SetInt32("id", id);
+                var result = query.UniqueResult();
+                return Convert.ToInt32(result) == 0;
+            }
+
+        }
+
         public static IEnumerable<User> GetUsers()
         {
             using (var session = NHibernateHelper.OpenSession())

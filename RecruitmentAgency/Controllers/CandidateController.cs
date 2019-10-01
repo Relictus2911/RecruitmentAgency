@@ -36,7 +36,7 @@ namespace RecruitmentAgency.Controllers
                 }
                 CandidateDAL.Create(new Candidate { FullName = model.FullName, Birthday = model.Birthday, KeyWords = model.KeyWords, Photo = imageData, UserId = UserDAL.GetUserByName(User.Identity.Name), WorkExpirience = model.WorkExpirience});
                 ViewBag.Message = "Your contact page.";
-                return this.RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -52,7 +52,7 @@ namespace RecruitmentAgency.Controllers
             {
                 if (UserDAL.GetUserByName(User.Identity.Name).Role == Enum.Role.candidate && UserDAL.GetUserByName(User.Identity.Name).Id != CandidateDAL.GetCandidateById(id).UserId.Id)
                 {
-                    return View("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             var model = CandidateDAL.GetCandidateById(id);
@@ -64,7 +64,7 @@ namespace RecruitmentAgency.Controllers
         {
             if (UserDAL.GetUserByName(User.Identity.Name).Role == Enum.Role.employer)
             {
-                return View("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             var model = VacancyDAL.SearchForVacancy(CandidateDAL.GetCandidateById(id).KeyWords, CandidateDAL.GetCandidateById(id).WorkExpirience);
             return View("VacanciesForCandidate", model);

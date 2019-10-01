@@ -17,7 +17,7 @@
     <property name="Role" >
       <column name="Role" sql-type="PersistentEnum" not-null="true"/>
     </property>
-    <one-to-one name="Candidate" class="Candidate" property-ref="UserId"/>
+    <one-to-one name="Candidate" class="Candidate" property-ref="UserId" cascade="all" />
   </class>
   
 </hibernate-mapping>

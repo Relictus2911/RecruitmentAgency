@@ -16,6 +16,7 @@
 					<p>Роль</p>
 				<th>
 				<th class="col-md-3"></th>
+				<th class="col-md-3"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +33,8 @@
 				{
 					<td>@Html.ActionLink("Список Вакансий", "MyVacancies", "Vacancy", new { item.Id }, null) </td>
 				}
+				<td>@Html.ActionLink("Удалить", "RemoveUser", "Admin", new { item.Id }, null) </td>
+
 			</tr>
 			}
 		</tbody>

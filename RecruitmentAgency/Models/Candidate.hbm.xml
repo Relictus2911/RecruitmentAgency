@@ -24,7 +24,7 @@
       <column name="WorkExpirience" sql-type="PersistentEnum" />
     </property>
 
-    <many-to-one name="UserId" class="User" column="UserId" unique="true"/>
+    <many-to-one name="UserId" class="User" column="UserId" unique="true" cascade ="all"/>
 
   </class>
 

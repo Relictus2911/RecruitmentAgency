@@ -9,7 +9,7 @@
 {
 	if (Model.Count() != 0)
 	{
-		if (UserDAL.GetUserByName(User.Identity.Name).Id == Model.ElementAt(0).UserId || UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.admin)
+		if (UserDAL.GetUserByName(User.Identity.Name).Id == Model.ElementAt(0).UserId.Id || UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.admin)
 		{
 			using (Html.BeginForm("MyVacancies", "Vacancy", FormMethod.Post, new { id = "view-vacancy-form" }))
 			{

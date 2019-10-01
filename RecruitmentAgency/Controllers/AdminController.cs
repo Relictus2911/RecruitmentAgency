@@ -13,12 +13,18 @@ namespace RecruitmentAgency.Controllers
         [Authorize]
         public ActionResult UserList()
         {
-            if(UserDAL.GetUserByName(User.Identity.Name).Role != Enum.Role.admin)
+            if (UserDAL.GetUserByName(User.Identity.Name).Role != Enum.Role.admin)
             {
-                return View("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             var model = UserDAL.GetUsers();
-            return View("UserList",model);
+            return View("UserList", model);
+        }
+        [Authorize]
+        public ActionResult RemoveUser(int id)
+        {
+            UserDAL.RemoveUser(id);
+            return View();
         }
     }
 }

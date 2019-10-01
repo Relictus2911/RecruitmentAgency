@@ -36,6 +36,7 @@
         name="UserId"
         column="UserId"
         class ="User"
+        cascade="all"
         not-null="true"/>
 
     <property name="WorkExpirience" >

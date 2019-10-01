@@ -260,6 +260,7 @@
     <Content Include="Views\Vacancy\CandidateForVacancy.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Shared\_Admin.cshtml" />
+    <Content Include="Views\Admin\RemoveUser.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

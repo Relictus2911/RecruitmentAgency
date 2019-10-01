@@ -82,7 +82,7 @@
 
 	</dl>
 </div>
-@if (UserDAL.GetUserByName(User.Identity.Name).Id == Model.UserId)
+@if (UserDAL.GetUserByName(User.Identity.Name).Id == Model.UserId.Id)
 {
 	<p>
 		@Html.ActionLink("Открыть или закрыть вакансию", "VacancyDetails", "Vacancy", new { id = Model.Id, isOpen = Model.IsOpen }, null)
