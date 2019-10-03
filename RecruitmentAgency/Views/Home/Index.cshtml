@@ -17,15 +17,23 @@
 	if (UserDAL.GetUserByName(User.Identity.Name).Role == Role.employer)
 	{
 		@Html.ActionLink("Создать вакансию", "Vacancy", "Vacancy") <br>
-		@Html.ActionLink("Посмотреть свои вакансии", "MyVacancies", "Vacancy") <br>
+		@Html.ActionLink("Посмотреть свои вакансии", "MyVacancies", "Vacancy", UserDAL.GetUserByName(User.Identity.Name).Id, null) <br>
 	}
 	if (UserDAL.GetUserByName(User.Identity.Name).Role == Role.candidate)
 	{
+		if (CandidateDAL.GetCandidateById(UserDAL.GetUserByName(User.Identity.Name).Id) != null)
+		{
+		@Html.ActionLink("Посмотреть резюме", "CandidateDetails", "Candidate", new { UserDAL.GetUserByName(User.Identity.Name).Id },null) <br>
+		}
+		else
+		{
 		@Html.ActionLink("Создать резюме", "Candidate", "Candidate") <br>
-		@Html.ActionLink("Посмотреть вакансии", "ListOfVacancy", "Vacancy")
+		}
+		@Html.ActionLink("Посмотреть вакансии", "ListOfVacancies", "Vacancy")
 	}
 	if (UserDAL.GetUserByName(User.Identity.Name).Role == Role.admin)
 	{
-		@Html.ActionLink("Посмотреть пользователей", "ListOfCandidates", "Candidate")
+		@Html.ActionLink("Посмотреть пользователей", "UserList", "Admin") <br>
+		@Html.ActionLink("Посмотреть вакансии", "ListOfVacancies", "Vacancy")
 	}
 }

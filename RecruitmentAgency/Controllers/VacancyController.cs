@@ -67,7 +67,7 @@ namespace RecruitmentAgency.Controllers
             {
                 return View("Index", "Home");
             }
-            var vacancies = VacancyDAL.GetVacancies().Select(
+            var vacancies = VacancyDAL.GetVacancies(UserDAL.GetUserByName(User.Identity.Name).Role).Select(
                         x =>
                         new VacancyViewModel
                         {
@@ -84,12 +84,12 @@ namespace RecruitmentAgency.Controllers
 
             if (!String.IsNullOrEmpty(searchStringByName))
             {
-                vacancies = vacancies.Where(s => s.Name.Contains(searchStringByName)
-                                       || s.Description.Contains(searchStringByName));
+                vacancies = vacancies.Where(s => s.Name.Contains(searchStringByName));
+                                       
             }
             if (!String.IsNullOrEmpty(searchByPayment))
             {
-                vacancies = vacancies.Where(s => int.Parse(s.Payment) > int.Parse(searchByPayment));
+                vacancies = vacancies.Where(s => int.Parse(s.Payment) >= int.Parse(searchByPayment));
             }
             if (searchByDate != null)
             {
@@ -139,11 +139,11 @@ namespace RecruitmentAgency.Controllers
         }
 
         [Authorize]
-        public ActionResult MyVacancies(string sortOrder)
+        public ActionResult MyVacancies(string sortOrder, int id)
         {
             if (ModelState.IsValid)
             {
-                int id = UserDAL.GetUserByName(User.Identity.Name).Id;
+                //int id = UserDAL.GetUserByName(User.Identity.Name).Id;
                 var vacancies = VacancyDAL.GetVacanciesByUserId(id);
 
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";

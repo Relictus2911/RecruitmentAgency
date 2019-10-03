@@ -3,7 +3,7 @@
 	ViewBag.Title = "Кандидаты подходящие для вакансии";
 }
 
-
+<h1>Кандидаты подходящие для вакансии</h1>
 @model IEnumerable<RecruitmentAgency.Models.Candidate>
 
 @using (Html.BeginForm("CandidateForVacancy", "Vacancy", FormMethod.Post, new { id = "view-candidates-form" }))

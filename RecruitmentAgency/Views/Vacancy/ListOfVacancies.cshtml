@@ -3,22 +3,22 @@
 	ViewBag.Title = "Список вакансий";
 }
 
-
+<h1>Список вакансий</h1>
 @model IEnumerable<RecruitmentAgency.Models.ViewModels.VacancyViewModel>
 
 @using (Html.BeginForm("ListOfVacancies", "Vacancy", FormMethod.Post, new { id = "view-vacancy-form" }))
 {
 
 	<p>
-		Find : @Html.TextBox("searchStringByName")
+		Поиск по названию : @Html.TextBox("searchStringByName")
 		<input type="submit" value="Search" />
 	</p>
 	<p>
-		Find : @Html.TextBox("searchByDate", DateTime.Today.ToShortDateString(), new { htmlAttributes = new { @class = "form-control datepicker" } })
+		Поиск по актуальной дате : @Html.TextBox("searchByDate", DateTime.Today.ToShortDateString(), new { htmlAttributes = new { @class = "form-control datepicker" } })
 		<input type="submit" value="Search" />
 	</p>
 	<p>
-		Find : @Html.TextBox("searchByPayment")
+		Поиск по зарплате(от скольки) : @Html.TextBox("searchByPayment")
 		<input type="submit" value="Search" />
 	</p>
 

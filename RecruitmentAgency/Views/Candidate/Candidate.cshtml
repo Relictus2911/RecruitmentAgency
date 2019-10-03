@@ -1,9 +1,11 @@
 ﻿@using RecruitmentAgency.Data_Access_Layer
-@model RecruitmentAgency.Models.ViewModels.CandidateViewModel
+@model RecruitmentAgency.Models.Candidate
 
 @{
 	ViewBag.Title = "Создать резюме";
 }
+
+<h1>Создать резюме</h1>
 @if (UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.candidate)
 {
 

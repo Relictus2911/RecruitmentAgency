@@ -23,6 +23,10 @@ namespace RecruitmentAgency.Controllers
         [HttpPost]
         public ActionResult Candidate(CandidateViewModel model, HttpPostedFileBase uploadImage)
         {
+            if(UserDAL.GetUserByName(User.Identity.Name).Candidate != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (ModelState.IsValid)
             {
 
@@ -36,7 +40,7 @@ namespace RecruitmentAgency.Controllers
                 }
                 if (CandidateDAL.Create(new Candidate { FullName = model.FullName, Birthday = model.Birthday, KeyWords = model.KeyWords, Photo = imageData, UserId = UserDAL.GetUserByName(User.Identity.Name), WorkExpirience = model.WorkExpirience }))
                 {
-                    return View("CandidateDetails", "Candidate", model);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -47,7 +51,7 @@ namespace RecruitmentAgency.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Registration failed.");
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]

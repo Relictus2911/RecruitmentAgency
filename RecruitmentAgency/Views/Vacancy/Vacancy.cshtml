@@ -3,7 +3,7 @@
 @{
 	ViewBag.Title = "Создать вакансию";
 }
-
+<h1>Создать вакансию</h1>
 @if (UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.employer)
 {
 	using (Html.BeginForm())

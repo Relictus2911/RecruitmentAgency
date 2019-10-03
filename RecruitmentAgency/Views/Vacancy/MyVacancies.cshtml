@@ -3,7 +3,7 @@
 	ViewBag.Title = "Список вакансий";
 }
 
-
+<h1>Список вакансий</h1>
 @model IEnumerable<RecruitmentAgency.Models.Vacancy>
 @if (UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.employer || UserDAL.GetUserByName(User.Identity.Name).Role == RecruitmentAgency.Enum.Role.admin)
 {

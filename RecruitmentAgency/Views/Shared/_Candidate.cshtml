@@ -9,8 +9,15 @@
 			<ul class="nav navbar-nav"></ul>
 		</div>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="@Url.Action("ListOfVacancies", "Vacancy")">Посмотреть вакансии</a>  </li>		
-			<li><a href="@Url.Action("CandidateDetails", "Candidate",new { UserDAL.GetUserByName(User.Identity.Name).Id })">Резюме</a></li>		
+			<li><a href="@Url.Action("ListOfVacancies", "Vacancy")">Посмотреть вакансии</a>  </li>
+			@if (CandidateDAL.GetCandidateById(UserDAL.GetUserByName(User.Identity.Name).Id) != null)
+			{
+				<li><a href="@Url.Action("CandidateDetails", "Candidate", new { UserDAL.GetUserByName(User.Identity.Name).Id })">Резюме</a></li>
+			}
+			else
+			{
+				<li><a href="@Url.Action("Candidate", "Candidate", new { UserDAL.GetUserByName(User.Identity.Name).Id })">Создать резюме</a></li>
+			}
 			<li>
 				@Html.ActionLink("Здравствуйте, " + User.Identity.Name + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage" })
 			</li>

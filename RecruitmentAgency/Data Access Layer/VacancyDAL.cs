@@ -116,15 +116,26 @@ namespace RecruitmentAgency.Data_Access_Layer
 
         }
 
-        public static IEnumerable<Vacancy> GetVacancies()
+        public static IEnumerable<Vacancy> GetVacancies(Role role)
         {
             using (var session = NHibernateHelper.OpenSession())
             {
 
-                var vacancies =
-                    session.Query<Vacancy>().OrderBy(x => x.Name).Where(x=> x.IsOpen == true)
+                if (role == Role.admin)
+                {
+                    var vacancies =
+                    session.Query<Vacancy>().OrderBy(x => x.Name)
                         .ToList();
-                return vacancies;
+                    return vacancies;
+                }
+                else
+                {
+                    var vacancies =
+                        session.Query<Vacancy>().OrderBy(x => x.Name).Where(x => x.IsOpen == true)
+                            .ToList();
+                    return vacancies;
+                }
+                
             }
         }
     }
