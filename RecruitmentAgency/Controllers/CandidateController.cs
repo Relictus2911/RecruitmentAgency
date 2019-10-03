@@ -51,7 +51,7 @@ namespace RecruitmentAgency.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Registration failed.");
             }
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         [Authorize]
