@@ -17,7 +17,7 @@
 	if (UserDAL.GetUserByName(User.Identity.Name).Role == Role.employer)
 	{
 		@Html.ActionLink("Создать вакансию", "Vacancy", "Vacancy") <br>
-		@Html.ActionLink("Посмотреть свои вакансии", "MyVacancies", "Vacancy", UserDAL.GetUserByName(User.Identity.Name).Id, null) <br>
+		@Html.ActionLink("Посмотреть свои вакансии", "MyVacancies", "Vacancy",new { UserDAL.GetUserByName(User.Identity.Name).Id }, null) <br>
 	}
 	if (UserDAL.GetUserByName(User.Identity.Name).Role == Role.candidate)
 	{

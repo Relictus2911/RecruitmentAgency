@@ -16,6 +16,10 @@ namespace RecruitmentAgency.Controllers
         // GET: Account
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -23,7 +27,8 @@ namespace RecruitmentAgency.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
-            if(model.Role == Enum.Role.admin)
+            
+            if (model.Role == Enum.Role.admin)
             {
                 ModelState.AddModelError(string.Empty, "Вам нельзя регистрировать пользователей этого типа");
                 return View(model);
@@ -61,12 +66,17 @@ namespace RecruitmentAgency.Controllers
 
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
+           
             if (ModelState.IsValid)
             {
                 if (ValidationHelper.ValidateUser(new User { UserName = model.UserName, Password = ValidationHelper.Encode(model.Password) }))
@@ -76,7 +86,7 @@ namespace RecruitmentAgency.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Login failed.");
+                    ModelState.AddModelError(string.Empty, "Вход провалился");
                 }
             }
             return View(model);

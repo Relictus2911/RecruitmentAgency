@@ -18,19 +18,19 @@
 				<table class="table table-hover" id="resultTable">
 					<thead>
 						<tr>
-							<th>
+							<th class="col-md-3">
 								@Html.ActionLink("Имя", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.NameSortParm }, null)
 							</th>
-							<th>
+							<th class="col-md-5">
 								@Html.ActionLink("Описание", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.DescripSortParm }, null)
 							</th>
-							<th>
+							<th class="col-md-3">
 								@Html.ActionLink("Дата закрытия", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.CloseDateSortParm }, null)
 							</th>
-							<th>
+							<th class="col-md-3">
 								@Html.ActionLink("Оплата", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.PaymentSortParm }, null)
 							</th>
-							<th>
+							<th class="col-md-3">
 								@Html.ActionLink("Вакансия открыта?", "MyVacancies", "Vacancy", new { sortOrder = ViewBag.IsOpenSortParam }, null)
 							</th>
 							<th class="col-md-1"></th>
