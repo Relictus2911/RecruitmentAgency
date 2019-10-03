@@ -34,9 +34,14 @@ namespace RecruitmentAgency.Controllers
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                     }
                 }
-                CandidateDAL.Create(new Candidate { FullName = model.FullName, Birthday = model.Birthday, KeyWords = model.KeyWords, Photo = imageData, UserId = UserDAL.GetUserByName(User.Identity.Name), WorkExpirience = model.WorkExpirience});
-                ViewBag.Message = "Your contact page.";
-                return RedirectToAction("Index", "Home");
+                if (CandidateDAL.Create(new Candidate { FullName = model.FullName, Birthday = model.Birthday, KeyWords = model.KeyWords, Photo = imageData, UserId = UserDAL.GetUserByName(User.Identity.Name), WorkExpirience = model.WorkExpirience }))
+                {
+                    return View("CandidateDetails", "Candidate", model);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Что-то пошло не так, попробуйте ещё раз");
+                }
             }
             else
             {

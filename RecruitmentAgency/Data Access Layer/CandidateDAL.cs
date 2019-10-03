@@ -53,6 +53,7 @@ namespace RecruitmentAgency.Data_Access_Layer
             using (var session = NHibernateHelper.OpenSession())
             {
                 string[] keyWordsSplited = keyWords.Split(',');
+                keyWordsSplited = keyWordsSplited.Where(x => x != " ").ToArray();
                 List<Candidate> candidates = new List<Candidate>();
                 for (int i = 0; i < keyWordsSplited.Count(); i++)
                 {

@@ -22,7 +22,10 @@
 				<tr>
 					<td>@item.FullName</td>
 					<td>@item.KeyWords</td>
-					<td>@Html.ActionLink("Details", "CandidateDetails", "Candidate", new { id = item.UserId }, null)</td>
+					@if (item != null)
+					{
+					<td>@Html.ActionLink("Details", "CandidateDetails", "Candidate", new { id = item.UserId.Id }, null)</td>
+					}
 				</tr>
 					}
 			</tbody>

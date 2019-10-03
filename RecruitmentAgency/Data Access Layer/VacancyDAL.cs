@@ -86,6 +86,7 @@ namespace RecruitmentAgency.Data_Access_Layer
             using (var session = NHibernateHelper.OpenSession())
             {
                 string[] keyWordsSplited = keyWords.Split(',');
+                keyWordsSplited = keyWordsSplited.Where(x => x != " ").ToArray();
                 List<Vacancy> vacancies = new List<Vacancy>();
                 for (int i = 0; i < keyWordsSplited.Count(); i++)
                 {
@@ -121,7 +122,7 @@ namespace RecruitmentAgency.Data_Access_Layer
             {
 
                 var vacancies =
-                    session.Query<Vacancy>().OrderBy(x => x.Name)
+                    session.Query<Vacancy>().OrderBy(x => x.Name).Where(x=> x.IsOpen == true)
                         .ToList();
                 return vacancies;
             }

@@ -15,16 +15,23 @@ namespace RecruitmentAgency.Controllers
         [Authorize]
         public ActionResult VacancyDetails(int id, bool? isOpen)
         {
-            if(UserDAL.GetUserByName(User.Identity.Name).Role== Enum.Role.employer && UserDAL.GetUserByName(User.Identity.Name).Id != VacancyDAL.GetVacancyById(id).UserId.Id)
+            try
             {
-                return View("Index", "Home");
+                if (UserDAL.GetUserByName(User.Identity.Name).Role == Enum.Role.employer && UserDAL.GetUserByName(User.Identity.Name).Id != VacancyDAL.GetVacancyById(id).UserId.Id)
+                {
+                    return View("Index", "Home");
+                }
+                if (isOpen != null)
+                {
+                    VacancyDAL.CloseVacancy(id, isOpen);
+                }
+                var vacancy = VacancyDAL.GetVacancyById(id);
+                return View("VacancyDetails", vacancy);
             }
-            if (isOpen != null)
+            catch
             {
-                VacancyDAL.CloseVacancy(id, isOpen);
+                return RedirectToAction("Index", "Home");
             }
-            var vacancy = VacancyDAL.GetVacancyById(id);
-            return View("VacancyDetails", vacancy);
         }
 
         //}
@@ -40,13 +47,15 @@ namespace RecruitmentAgency.Controllers
         {
             if (ModelState.IsValid)
             {
-                VacancyDAL.Create(new Vacancy { Name = model.Name, CompanyName = model.CompanyName, Description = model.Description, Requirements = model.Requirements, Payment = model.Payment, KeyWords = model.KeyWords, CloseTime = model.CloseTime, IsOpen = model.IsOpen, WorkExpirience = model.WorkExpirience, UserId = UserDAL.GetUserByName(User.Identity.Name) });
-                ViewBag.Message = "Your contact page.";
-                return RedirectToAction("Index", "Home");
+                if (VacancyDAL.Create(new Vacancy { Name = model.Name, CompanyName = model.CompanyName, Description = model.Description, Requirements = model.Requirements, Payment = model.Payment, KeyWords = model.KeyWords, CloseTime = model.CloseTime, IsOpen = model.IsOpen, WorkExpirience = model.WorkExpirience, UserId = UserDAL.GetUserByName(User.Identity.Name) }))
+                {
+                    ViewBag.Message = "Your contact page.";
+                    return RedirectToAction("Index", "Home");
+                }              
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Registration failed.");
+                ModelState.AddModelError(string.Empty, "Что-то пошло не так, попробуйте ещё раз");
             }
             return View();
         }
@@ -69,7 +78,8 @@ namespace RecruitmentAgency.Controllers
                             CloseTime = x.CloseTime,
                             Requirements = x.Requirements,
                             WorkExpirience = x.WorkExpirience,
-                            Payment = x.Payment
+                            Payment = x.Payment,
+                            IsOpen = x.IsOpen
                         });
 
             if (!String.IsNullOrEmpty(searchStringByName))
